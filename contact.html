@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact - Sumi's Resort</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap');
+
+    :root {
+      --gold: #b13782;
+      --dark: #04046f;
+      --bg: #f9f6f0;
+      --text: #333232;
+      --white: #ffffff;
+      --max-w: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      padding: 0 40px;
+      height: 75px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      color: rgba(255, 255, 255, .85);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .menu a:hover {
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, .75);
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding: 50px 60px;
+    }
+
+    .footer-col h4 {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .footer-col p,
+    .footer-col li {
+      font-size: .88rem;
+      line-height: 1.9;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, .7);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 18px;
+      font-size: .8rem;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .section-title .line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 12px auto 0;
+    }
+
+    .section-title p {
+      margin-top: 14px;
+      color: #666;
+      font-size: .95rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page-hero {
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 26, 46, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+
+    .page-hero-overlay h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .page-hero-overlay p {
+      margin-top: 8px;
+      opacity: .8;
+      letter-spacing: 2px;
+      font-size: .85rem;
+      text-transform: uppercase;
+    }
+
+    @media(max-width:768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        padding: 20px 40px;
+        gap: 16px;
+      }
+
+      .menu.open {
+        display: flex;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+  <script>function toggleMenu() { document.getElementById('menu').classList.toggle('open'); }</script>
+  <style>
+    .contact-section {
+      padding: 80px 60px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 50px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .info-text h4 {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .info-text p,
+    .info-text a {
+      color: #666;
+      font-size: .92rem;
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    .info-text a:hover {
+      color: var(--gold);
+    }
+
+    .contact-img {
+      margin-top: 30px;
+    }
+
+    .contact-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* FORM */
+    .contact-form {
+      background: white;
+      padding: 44px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, .08);
+    }
+
+    .contact-form h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: .82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #e0d8c8;
+      background: var(--bg);
+      font-family: 'Jost', sans-serif;
+      font-size: .93rem;
+      color: var(--text);
+      outline: none;
+      transition: .3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      height: 130px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--dark);
+      color: white;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: .85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .3s;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold);
+    }
+
+    .success-msg {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #2e7d32;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: .9rem;
+    }
+
+    @media(max-width:768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-section {
+        padding: 50px 30px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img src="logo.jpeg" alt="Sumi's Resort"></a></div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="page-hero">
+    <img src="3.jpeg" alt="Contact">
+    <div class="page-hero-overlay">
+      <h1>Contact Us</h1>
+      <p>We'd Love to Hear From You</p>
+    </div>
+  </section>
+  <section class="contact-section">
+    <div class="section-title">
+      <h2>Get In Touch</h2>
+      <div class="line"></div>
+      <p>Reach out to us for reservations, enquiries, or just to say hello.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info">
+          <h3>Visit Us</h3>
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-text">
+              <h4>Address</h4>
+              <p>Sumi's Resort, Chitwan, Nepal</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div class="info-text">
+              <h4>Email</h4><a href="mailto:sumiresort@gmail.com">sumiresort@gmail.com</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-text">
+              <h4>Phone</h4>
+              <p>+977 980-000-0000</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div class="info-text">
+              <h4>Check-in / Check-out</h4>
+              <p>Check-in: 2:00 PM &nbsp;|&nbsp; Check-out: 12:00 PM</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🌐</div>
+            <div class="info-text">
+              <h4>Useful Link</h4><a href="https://www.google.com" target="_blank">Visit Google Maps &rarr;</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-img"><img src="welcome.jpeg" alt="Resort"></div>
+      </div>
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" id="fname" placeholder="Your first name">
+          </div>
+          <div class="form-group"><label>Last Name</label><input type="text" id="lname" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+977 ..."></div>
+        <div class="form-group"><label>Enquiry Type</label>
+          <select id="type">
+            <option value="">Select...</option>
+            <option>Room Booking</option>
+            <option>General Enquiry</option>
+            <option>Event / Function</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="msg"
+            placeholder="Write your message here..."></textarea></div>
+        <button class="btn-submit" onclick="submitForm()">Send Message</button>
+        <div class="success-msg" id="success">✓ Thank you! Your message has been sent. We will get back to you soon.
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sumi's Resort</h4>
+        <p>A peaceful haven where luxury meets nature in the heart of Nepal.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Chitwan, Nepal</p>
+        <p><a href="mailto:sumiresort@gmail.com">sumiresort@gmail.com</a></p>
+        <p>+977 980-000-0000</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sumi's Resort | Chitwan, Nepal</div>
+  </footer>
+  <script>
+    function submitForm() {
+      var fname = document.getElementById('fname').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var msg = document.getElementById('msg').value.trim();
+      if (!fname) { alert('Please enter your first name.'); return; }
+      if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+      if (!msg) { alert('Please enter a message.'); return; }
+      document.getElementById('success').style.display = 'block';
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('msg').value = '';
+      document.getElementById('type').value = '';
+    }
+  </script>
+</body>
+
+</html>

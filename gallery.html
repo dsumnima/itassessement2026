@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gallery - Sumi's Resort</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap');
+
+    :root {
+      --gold: #b82c82;
+      --dark: #050560;
+      --bg: #f9f6f0;
+      --text: #2f2e2e;
+      --white: #ffffff;
+      --max-w: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      padding: 0 40px;
+      height: 75px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      color: rgba(255, 255, 255, .85);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .menu a:hover {
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, .75);
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding: 50px 60px;
+    }
+
+    .footer-col h4 {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .footer-col p,
+    .footer-col li {
+      font-size: .88rem;
+      line-height: 1.9;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, .7);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 18px;
+      font-size: .8rem;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .section-title .line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 12px auto 0;
+    }
+
+    .section-title p {
+      margin-top: 14px;
+      color: #666;
+      font-size: .95rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page-hero {
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 26, 46, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+
+    .page-hero-overlay h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .page-hero-overlay p {
+      margin-top: 8px;
+      opacity: .8;
+      letter-spacing: 2px;
+      font-size: .85rem;
+      text-transform: uppercase;
+    }
+
+    @media(max-width:768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        padding: 20px 40px;
+        gap: 16px;
+      }
+
+      .menu.open {
+        display: flex;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+  <script>function toggleMenu() { document.getElementById('menu').classList.toggle('open'); }</script>
+  <style>
+    .gallery-section {
+      padding: 80px 60px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 50px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: transform .5s;
+      display: block;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.07);
+    }
+
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(26, 26, 46, .8));
+      color: white;
+      padding: 20px 16px 14px;
+      font-size: .85rem;
+      letter-spacing: 1px;
+      transform: translateY(100%);
+      transition: transform .3s;
+    }
+
+    .gallery-item:hover .caption {
+      transform: translateY(0);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    @media(max-width:768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-section {
+        padding: 50px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img
+            src="logo.jpeg"
+            alt="Sumi's Resort"></a></div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="page-hero">
+    <img
+      src="2.jpeg"
+      alt="Gallery">
+    <div class="page-hero-overlay">
+      <h1>Gallery</h1>
+      <p>Glimpses of Paradise</p>
+    </div>
+  </section>
+  <section class="gallery-section">
+    <div class="section-title">
+      <h2>Our Resort in Pictures</h2>
+      <div class="line"></div>
+      <p>A visual journey through Sumi's Resort — click any image to view full size.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"
+        onclick="openLb('pool.jpeg','Pool Area')">
+        <img
+          src="pool.jpeg"
+          alt="Pool">
+        <div class="caption">Pool Area</div>
+      </div>
+      <div class="gallery-item"
+        onclick="openLb('about.jpeg','Nature Retreat')">
+        <img
+          src="about.jpeg"
+          alt="Nature">
+        <div class="caption">Nature Retreat</div>
+      </div>
+      <div class="gallery-item"
+        onclick="openLb('2.jpeg','Garden View')">
+        <img
+          src="2.jpeg"
+          alt="Garden">
+        <div class="caption">Garden View</div>
+      </div>
+      <div class="gallery-item"
+        onclick="openLb('3.jpeg','Riverside Sunset')">
+        <img
+          src="3.jpeg"
+          alt="River">
+        <div class="caption">Riverside Sunset</div>
+      </div>
+      <div class="gallery-item"
+        onclick="openLb('1.jpeg','Outdoor Lounge')">
+        <img
+          src="1.jpeg"
+          alt="Lounge" style="transform:scaleX(-1)">
+        <div class="caption">Outdoor Lounge</div>
+      </div>
+      <div class="gallery-item"
+        onclick="openLb('2.jpeg','Tropical Gardens')">
+        <img
+          src="2.jpeg"
+          alt="Tropical">
+        <div class="caption">Tropical Gardens</div>
+      </div>
+    </div>
+  </section>
+  <div class="lightbox" id="lb" onclick="closeLb()">
+    <span class="lb-close">&times;</span>
+    <img id="lb-img" src="" alt="">
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sumi's Resort</h4>
+        <p>A peaceful haven where luxury meets nature in the heart of Nepal.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Chitwan, Nepal</p>
+        <p><a href="mailto:sumiresort@gmail.com">sumiresort@gmail.com</a></p>
+        <p>+977 980-000-0000</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sumi's Resort | Chitwan, Nepal</div>
+  </footer>
+  <script>
+    function openLb(src, alt) { document.getElementById('lb-img').src = src; document.getElementById('lb-img').alt = alt; document.getElementById('lb').classList.add('open'); }
+    function closeLb() { document.getElementById('lb').classList.remove('open'); }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Services - Sumi's Resort</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap');
+
+    :root {
+      --gold: #e100b4;
+      --dark: #04046d;
+      --bg: #f9f6f0;
+      --text: #292828;
+      --white: #ffffff;
+      --max-w: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      padding: 0 40px;
+      height: 75px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      color: rgba(255, 255, 255, .85);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .menu a:hover {
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, .75);
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding: 50px 60px;
+    }
+
+    .footer-col h4 {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .footer-col p,
+    .footer-col li {
+      font-size: .88rem;
+      line-height: 1.9;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, .7);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 18px;
+      font-size: .8rem;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .section-title .line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 12px auto 0;
+    }
+
+    .section-title p {
+      margin-top: 14px;
+      color: #666;
+      font-size: .95rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page-hero {
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 26, 46, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+
+    .page-hero-overlay h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .page-hero-overlay p {
+      margin-top: 8px;
+      opacity: .8;
+      letter-spacing: 2px;
+      font-size: .85rem;
+      text-transform: uppercase;
+    }
+
+    @media(max-width:768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        padding: 20px 40px;
+        gap: 16px;
+      }
+
+      .menu.open {
+        display: flex;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+  <script>function toggleMenu() { document.getElementById('menu').classList.toggle('open'); }</script>
+  <style>
+    .services-section {
+      padding: 80px 60px;
+    }
+
+    .services-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .srv-big {
+      background: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .08);
+      overflow: hidden;
+    }
+
+    .srv-big img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .srv-big-text {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .srv-big-text .icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .srv-big-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .srv-big-text p {
+      font-size: .9rem;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* ROOMS TABLE */
+    .rooms-section {
+      background: var(--dark);
+      padding: 80px 60px;
+    }
+
+    .rooms-section .section-title h2 {
+      color: white;
+    }
+
+    .rooms-section .section-title p {
+      color: rgba(255, 255, 255, .6);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 50px;
+      background: white;
+    }
+
+    thead {
+      background: var(--gold);
+    }
+
+    thead th {
+      padding: 18px 24px;
+      text-align: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f0ebe0;
+      transition: .2s;
+    }
+
+    tbody tr:hover {
+      background: #fdf9f2;
+    }
+
+    td {
+      padding: 18px 24px;
+      font-size: .92rem;
+      color: var(--text);
+    }
+
+    td:last-child {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 12px;
+      font-size: .75rem;
+      border-radius: 20px;
+      background: rgba(201, 168, 76, .15);
+      color: #9a7a2e;
+      letter-spacing: 1px;
+    }
+
+    @media(max-width:768px) {
+      .services-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .srv-big {
+        grid-template-columns: 1fr;
+      }
+
+      .services-section,
+      .rooms-section {
+        padding: 50px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img
+            src="logo.jpeg"
+            alt="Sumi's Resort"></a></div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="page-hero">
+    <img
+      src="1.jpeg"
+      alt="Services">
+    <div class="page-hero-overlay">
+      <h1>Our Services</h1>
+      <p>Luxury Amenities &amp; Experiences</p>
+    </div>
+  </section>
+  <section class="services-section">
+    <div class="section-title">
+      <h2>What We Offer</h2>
+      <div class="line"></div>
+      <p>Every service crafted to elevate your stay.</p>
+    </div>
+    <div class="services-cards">
+      <div class="srv-big">
+        <img
+          src="pool.jpeg"
+          alt="Pool">
+        <div class="srv-big-text">
+          <div class="icon">🏊</div>
+          <h3>Swimming Pool</h3>
+          <p>Our stunning outdoor pool is surrounded by lush tropical greenery. Relax on loungers poolside or take a
+            refreshing dip.</p>
+        </div>
+      </div>
+      <div class="srv-big">
+        <img
+          src="about.jpeg"
+          alt="Rooms">
+        <div class="srv-big-text">
+          <div class="icon">🛏️</div>
+          <h3>Luxury Rooms</h3>
+          <p>Choose from our elegantly appointed Deluxe and Suite rooms, each featuring premium bedding, modern
+            furnishings, and garden views.</p>
+        </div>
+      </div>
+      <div class="srv-big">
+        <img
+          src="2.jpeg"
+          alt="Garden">
+        <div class="srv-big-text">
+          <div class="icon">🌿</div>
+          <h3>Garden &amp; Grounds</h3>
+          <p>Wander through our beautifully landscaped gardens filled with exotic tropical plants and serene sitting
+            areas.</p>
+        </div>
+      </div>
+      <div class="srv-big">
+        <img
+          src="3.jpeg"
+          alt="River">
+        <div class="srv-big-text">
+          <div class="icon">🚣</div>
+          <h3>River Activities</h3>
+          <p>Enjoy early morning boat rides on the river. Watch the sunrise reflect on the calm waters in a truly
+            magical experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="rooms-section">
+    <div class="section-title">
+      <h2>Room Rates</h2>
+      <div class="line"></div>
+      <p style="color:rgba(255,255,255,.6)">All rates per night including breakfast.</p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Room Type</th>
+          <th>Occupancy</th>
+          <th>Amenities</th>
+          <th>Price/Night</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Standard Room</td>
+          <td>2 Guests</td>
+          <td>AC, TV, WiFi <span class="badge">Popular</span></td>
+          <td>$60</td>
+        </tr>
+        <tr>
+          <td>Deluxe Room</td>
+          <td>2 Guests</td>
+          <td>AC, TV, WiFi, Garden View</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>Superior Room</td>
+          <td>3 Guests</td>
+          <td>AC, TV, WiFi, Pool View</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>Suite</td>
+          <td>4 Guests</td>
+          <td>AC, TV, WiFi, Balcony, Jacuzzi <span class="badge">Luxury</span></td>
+          <td>$200</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sumi's Resort</h4>
+        <p>A peaceful haven where luxury meets nature in the heart of Nepal.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Chitwan, Nepal</p>
+        <p><a href="mailto:sumiresort@gmail.com">sumiresort@gmail.com</a></p>
+        <p>+977 980-000-0000</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sumi's Resort | Chitwan, Nepal</div>
+  </footer>
+</body>
+
+</html>

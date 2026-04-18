@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About - Sumi's Resort</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap');
+
+    :root {
+      --gold: #f90bb5;
+      --dark: #1e065a;
+      --bg: #f9f6f0;
+      --text: #3a3a3a;
+      --white: #ffffff;
+      --max-w: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      padding: 0 40px;
+      height: 75px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      color: rgba(255, 255, 255, .85);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .menu a:hover {
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, .75);
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding: 50px 60px;
+    }
+
+    .footer-col h4 {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .footer-col p,
+    .footer-col li {
+      font-size: .88rem;
+      line-height: 1.9;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, .7);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 18px;
+      font-size: .8rem;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .section-title .line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 12px auto 0;
+    }
+
+    .section-title p {
+      margin-top: 14px;
+      color: #666;
+      font-size: .95rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page-hero {
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 26, 46, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+
+    .page-hero-overlay h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .page-hero-overlay p {
+      margin-top: 8px;
+      opacity: .8;
+      letter-spacing: 2px;
+      font-size: .85rem;
+      text-transform: uppercase;
+    }
+
+    @media(max-width:768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        padding: 20px 40px;
+        gap: 16px;
+      }
+
+      .menu.open {
+        display: flex;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+  <script>function toggleMenu() { document.getElementById('menu').classList.toggle('open'); }</script>
+  <style>
+    .about-section {
+      padding: 80px 60px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .about-grid img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+    }
+
+    .about-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .about-text p {
+      line-height: 1.9;
+      color: #555;
+      margin-bottom: 16px;
+      font-size: .95rem;
+    }
+
+    .values {
+      background: var(--dark);
+      padding: 80px 60px;
+    }
+
+    .values .section-title h2,
+    .values .section-title p {
+      color: white;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .val-card {
+      border: 1px solid rgba(201, 168, 76, .3);
+      padding: 36px 28px;
+      text-align: center;
+      color: white;
+      transition: .3s;
+    }
+
+    .val-card:hover {
+      background: rgba(201, 168, 76, .1);
+      border-color: var(--gold);
+    }
+
+    .val-card .icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .val-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .val-card p {
+      font-size: .88rem;
+      opacity: .75;
+      line-height: 1.8;
+    }
+
+    @media(max-width:768px) {
+
+      .about-grid,
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-section,
+      .values {
+        padding: 50px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img
+            src="logo.jpeg"
+            alt="Sumi's Resort"></a></div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="page-hero">
+    <img
+      src="welcome.jpeg"
+      alt="About">
+    <div class="page-hero-overlay">
+      <h1>About Us</h1>
+      <p>Our Story &amp; Values</p>
+    </div>
+  </section>
+  <section class="about-section">
+    <div class="section-title">
+      <h2>Who We Are</h2>
+      <div class="line"></div>
+    </div>
+    <div class="about-grid">
+      <img
+        src="about.jpeg"
+        alt="Resort Interior">
+      <div class="about-text">
+        <h3>A Legacy of Hospitality</h3>
+        <p>Founded with a vision to offer the finest blend of Nepali warmth and modern luxury, Sumi's Resort has been
+          welcoming guests from around the world for over a decade.</p>
+        <p>Our resort is more than just a place to stay — it is a destination where you can reconnect with nature,
+          unwind in comfort, and create memories that last a lifetime.</p>
+        <p>Situated in the lush surroundings of Nepal, every element of our property has been thoughtfully designed to
+          harmonize with the natural environment while providing every modern comfort.</p>
+      </div>
+    </div>
+  </section>
+  <section class="values">
+    <div class="section-title">
+      <h2>Our Values</h2>
+      <div class="line"></div>
+      <p style="color:rgba(255,255,255,.7)">The principles that guide everything we do.</p>
+    </div>
+    <div class="values-grid">
+      <div class="val-card">
+        <div class="icon">🌿</div>
+        <h4>Nature First</h4>
+        <p>We preserve and celebrate the natural beauty that surrounds our resort in everything we design.</p>
+      </div>
+      <div class="val-card">
+        <div class="icon">💎</div>
+        <h4>Luxury & Comfort</h4>
+        <p>We believe every guest deserves the finest experience, from accommodation to cuisine.</p>
+      </div>
+      <div class="val-card">
+        <div class="icon">🤝</div>
+        <h4>Genuine Hospitality</h4>
+        <p>Rooted in Nepali culture, our warmth and care for guests is authentic and heartfelt.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sumi's Resort</h4>
+        <p>A peaceful haven where luxury meets nature in the heart of Nepal.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Kathmandu, Nepal</p>
+        <p><a href="mailto:sumiresort@gmail.com">sumiresort@gmail.com</a></p>
+        <p>+977 980-000-0000</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sumi's Resort | Kathmandu, Nepal</div>
+  </footer>
+</body>
+
+</html>

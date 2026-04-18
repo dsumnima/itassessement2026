@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sumi's Resort - Home</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap');
+
+    :root {
+      --gold: #e71074;
+      --dark: #161645;
+      --bg: #f9f6f0;
+      --text: #5a5858;
+      --white: #ffffff;
+      --max-w: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      padding: 0 40px;
+      height: 75px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .menu a:hover {
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      padding: 50px 60px;
+    }
+
+    .footer-col h4 {
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .footer-col p,
+    .footer-col li {
+      font-size: 0.88rem;
+      line-height: 1.9;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .section-title .line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 12px auto 0;
+    }
+
+    .section-title p {
+      margin-top: 14px;
+      color: #666;
+      font-size: 0.95rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        padding: 20px 40px;
+        gap: 16px;
+      }
+
+      .menu.open {
+        display: flex;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+  <script>function toggleMenu() { document.getElementById('menu').classList.toggle('open'); }</script>
+
+  <style>
+    /* HERO SLIDER */
+    .hero {
+      position: relative;
+      height: 90vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(26, 26, 46, 0.45), rgba(26, 26, 46, 0.6));
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      width: 90%;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      animation: fadeUp .9s ease both;
+    }
+
+    .hero-text p {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin-top: 16px;
+      opacity: .9;
+      font-weight: 300;
+      letter-spacing: 1px;
+      animation: fadeUp .9s .2s ease both;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 40px;
+      border: 2px solid var(--gold);
+      color: white;
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: .3s;
+      animation: fadeUp .9s .4s ease both;
+    }
+
+    .hero-btn:hover {
+      background: var(--gold);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* DOTS */
+    .hero-dots {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .4);
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    /* WELCOME */
+    .welcome {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 480px;
+      margin-top: 80px;
+    }
+
+    .welcome-img {
+      overflow: hidden;
+    }
+
+    .welcome-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s;
+    }
+
+    .welcome-img:hover img {
+      transform: scale(1.04);
+    }
+
+    .welcome-text {
+      background: var(--dark);
+      color: white;
+      padding: 70px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .welcome-text .tag {
+      color: var(--gold);
+      font-size: .75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .welcome-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .welcome-text p {
+      opacity: .8;
+      line-height: 1.9;
+      font-size: .95rem;
+    }
+
+    .welcome-text a {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: .8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 3px;
+    }
+
+    /* SERVICES PREVIEW */
+    .services-preview {
+      padding: 90px 60px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 50px;
+    }
+
+    .srv-card {
+      background: white;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .06);
+      transition: .3s;
+      border-bottom: 3px solid transparent;
+    }
+
+    .srv-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .1);
+      border-bottom-color: var(--gold);
+    }
+
+    .srv-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+
+    .srv-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+
+    .srv-card p {
+      font-size: .88rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* HIGHLIGHTS */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 80px;
+    }
+
+    .hl {
+      position: relative;
+      overflow: hidden;
+      height: 350px;
+    }
+
+    .hl img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+
+    .hl:hover img {
+      transform: scale(1.07);
+    }
+
+    .hl-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 26, 46, .75), transparent);
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+    }
+
+    .hl-overlay span {
+      color: white;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--gold);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .stat h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .stat p {
+      font-size: .8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dark);
+      opacity: .75;
+      margin-top: 6px;
+    }
+
+    @media(max-width:768px) {
+      .welcome {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .services-preview {
+        padding: 60px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img src="logo.jpeg" alt="Sumi's Resort"></a></div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- HERO SLIDER -->
+  <section class="hero">
+    <div class="slide active"><img src="1.jpeg" alt="Resort Pool"></div>
+    <div class="slide"><img src="2.jpeg" alt="Resort Garden"></div>
+    <div class="slide"><img src="3.jpeg" alt="River View"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Welcome to<br>Sumi's Resort</h1>
+      <p>Luxury &amp; Comfort in the Heart of Nature</p>
+      <a href="services.html" class="hero-btn">Explore Our Rooms</a>
+    </div>
+    <div class="hero-dots">
+      <div class="dot active" onclick="goTo(0)"></div>
+      <div class="dot" onclick="goTo(1)"></div>
+      <div class="dot" onclick="goTo(2)"></div>
+    </div>
+  </section>
+
+  <!-- WELCOME -->
+  <section class="welcome">
+    <div class="welcome-img"><img src="welcome.jpeg" alt="Resort Interior"></div>
+    <div class="welcome-text">
+      <span class="tag">Welcome</span>
+      <h2>A Sanctuary<br>of Serenity</h2>
+      <p>Nestled in the lush landscapes of Nepal, Sumi's Resort offers a unique escape where luxury and nature
+        intertwine. From our sparkling pool to our tranquil gardens, every corner invites you to slow down and breathe
+        deeply.</p>
+      <a href="about.html">Discover Our Story &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="services-preview">
+    <div class="section-title">
+      <h2>What We Offer</h2>
+      <div class="line"></div>
+      <p>Experience world-class amenities designed for your comfort and relaxation.</p>
+    </div>
+    <div class="services-grid">
+      <div class="srv-card">
+        <div class="srv-icon">🛏️</div>
+        <h3>Luxury Rooms</h3>
+        <p>Spacious, elegantly furnished rooms with every modern comfort.</p>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">🏊</div>
+        <h3>Swimming Pool</h3>
+        <p>A stunning outdoor pool surrounded by tropical greenery.</p>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">🍽️</div>
+        <h3>Restaurant</h3>
+        <p>Savor authentic Nepali and international cuisine made fresh daily.</p>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">📶</div>
+        <h3>Free Wi-Fi</h3>
+        <p>Stay connected with high-speed complimentary internet access.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="highlights">
+    <div class="hl"><img src="pool.jpeg" alt="Pool">
+      <div class="hl-overlay"><span>The Pool</span></div>
+    </div>
+    <div class="hl"><img src="2.jpeg" alt="Garden">
+      <div class="hl-overlay"><span>The Garden</span></div>
+    </div>
+    <div class="hl"><img src="3.jpeg" alt="River View">
+      <div class="hl-overlay"><span>Riverside Views</span></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <h3>20+</h3>
+      <p>Luxury Rooms</p>
+    </div>
+    <div class="stat">
+      <h3>5★</h3>
+      <p>Guest Rating</p>
+    </div>
+    <div class="stat">
+      <h3>10+</h3>
+      <p>Years of Service</p>
+    </div>
+    <div class="stat">
+      <h3>500+</h3>
+      <p>Happy Guests</p>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Sumi's Resort</h4>
+        <p>A peaceful haven where luxury meets nature in the heart of Nepal.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p> Chitwan, Nepal</p>
+        <p><a href="mailto:sumiresort@gmail.com">sumiresort@gmail.com</a></p>
+        <p>+977 980-000-0000</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Sumi's Resort | Chitwan, Nepal</div>
+  </footer>
+
+  <script>
+    var slides = document.querySelectorAll('.slide');
+    var dots = document.querySelectorAll('.dot');
+    var cur = 0;
+    function goTo(n) {
+      slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+      cur = n; slides[cur].classList.add('active'); dots[cur].classList.add('active');
+    }
+    setInterval(function () { goTo((cur + 1) % slides.length); }, 4000);
+  </script>
+</body>
+
+</html>
